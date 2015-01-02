@@ -1,0 +1,254 @@
+/*  ==========================================================================
+    SASS variables
+    ========================================================================== */
+
+$font-stack: 'Open Sans', sans-serif, Helvetica;
+$main-purple: #291D41;
+
+body {
+  margin: 0;
+  font-family: $font-stack;
+  background: #F2F2F2;
+}
+
+/*  ========================================================================== 
+    HTML5 display definitions
+    ========================================================================== */
+
+/**
+ * Correct `block` display not defined for any HTML5 element in IE 8/9.
+ * Correct `block` display not defined for `details` or `summary` in IE 10/11
+ * and Firefox.
+ * Correct `block` display not defined for `main` in IE 11.
+ */
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+main,
+menu,
+nav,
+section,
+summary {
+    display: block;
+}
+
+a {
+    text-decoration: none;
+    color: #B9ACCB;
+}
+
+a:hover {
+    color: #6B3398;
+}
+
+ul, li {
+    margin: 0;
+    padding: 0;
+}
+
+li {
+    list-style: none;
+}
+
+.button {
+    border-radius: 3px;
+    padding: 10px;
+    border: 2px solid #B9ACCB;
+}
+
+.button:hover {
+    border: 2px solid $main-purple;
+    background: $main-purple;
+    color: #DDD;
+}
+
+/*  ==========================================================================
+    Helper classes
+    ========================================================================== */
+
+.hidden {
+    display: none !important;
+    visibility: hidden;
+}
+
+/*
+ * Clearfix: contain floats
+ *
+ * For modern browsers
+ * 1. The space content is one way to avoid an Opera bug when the
+ *    `contenteditable` attribute is included anywhere else in the document.
+ *    Otherwise it causes space to appear at the top and bottom of elements
+ *    that receive the `clearfix` class.
+ * 2. The use of `table` rather than `block` is only necessary if using
+ *    `:before` to contain the top-margins of child elements.
+ */
+
+.clearfix:before,
+.clearfix:after {
+    content: " "; /* 1 */
+    display: table; /* 2 */
+}
+
+.clearfix:after {
+    clear: both;
+}
+
+.centered {
+    text-align: center;
+}
+
+/*  ==========================================================================
+    App styles
+    ========================================================================== */
+
+h1 {
+    font-weight: 300;
+}
+
+.wrapper {
+    width: 90%;
+    margin: 0 auto;
+}
+
+header {
+    background: $main-purple;
+    color: #DDD;
+    padding: 10px 0;
+
+    .logo {
+        font-family: 'Fjalla One', sans-serif;
+        font-size: 30px;
+        float: left;
+
+        a {
+            color: #DDD;
+        }
+    }
+
+    nav {
+        float: right;
+        line-height: 35px;
+        
+        ul {
+            li {
+                float: left;
+                margin-left: 15px;
+            }
+        }
+    }
+}
+
+/*  ==========================================================================
+    todo box
+    ========================================================================== */
+
+.todo-wrapper {
+    width: 70%;
+    background: #FFF;
+    margin: 0 auto;
+    border-radius: 4px;
+    margin-bottom: 40px;
+}
+
+table {
+    width: 100%;
+}
+
+table thead tr th, 
+table tbody tr th, 
+table tfoot tr th, 
+table thead tr td, 
+table tbody tr td, 
+table tfoot tr td {
+    padding: 8px;
+    line-height: 1.42857143;
+    vertical-align: top;
+    border-top: 1px solid #ddd;
+}
+
+th, tr, td {
+    text-align: left;
+}
+
+table thead tr th {
+    color: #565656;
+    font-size: 14px;
+    border-top: none;
+}
+
+td {
+    color: #888;
+    font-size: 13px;
+}
+
+.checkbox {
+    text-align: center;
+    width: 10%;
+}
+
+/*  ==========================================================================
+    Footer
+    ========================================================================== */
+
+    footer {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        text-align: center;
+        padding: 10px 0;
+        color: #717171;
+        background: #E7E7E7;
+        font-size: 13px;
+
+        a {
+            color: #624589;
+        }
+    }
+
+    .love {
+        color: #e74c3c;
+        display: inline-block;
+        font-size: 1.4em;
+        position: relative;
+        top: .1em;
+        -webkit-transform: scale(.9);
+        -moz-transform: scale(.9);
+        transform: scale(.9);
+        -webkit-animation: love .5s infinite linear alternate-reverse;
+        -moz-animation: love .5s infinite linear alternate-reverse;
+        animation: love .5s infinite linear alternate-reverse;
+    }
+
+    @-webkit-keyframes love {
+        to { -webkit-transform: scale(1.2); }
+    }
+
+    @-moz-keyframes love {
+        to { -moz-transform: scale(1.2); }
+    }
+
+    @keyframes love {
+        to { transform: scale(1.2); }
+    }
+
+/*  ==========================================================================
+    Media queries
+    ========================================================================== */
+
+@media screen and (max-width: 1400px) {
+    .todo-wrapper {
+        width: 90%;
+    }
+}
+
+@media screen and (max-width: 950px) {
+    .todo-wrapper {
+        width: 100%;
+    }
+}
