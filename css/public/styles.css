@@ -51,7 +51,8 @@ li {
 
 .button:hover {
   border: 2px solid #291D41;
-  color: #291D41; }
+  background: #291D41;
+  color: #DDD; }
 
 /*  ==========================================================================
     Helper classes
@@ -91,7 +92,7 @@ h1 {
   font-weight: 300; }
 
 .wrapper {
-  width: 80%;
+  width: 90%;
   margin: 0 auto; }
 
 header {
@@ -102,8 +103,11 @@ header {
     font-family: 'Fjalla One', sans-serif;
     font-size: 30px;
     float: left; }
+    header .logo a {
+      color: #DDD; }
   header nav {
-    float: right; }
+    float: right;
+    line-height: 35px; }
     header nav ul li {
       float: left;
       margin-left: 15px; }
@@ -143,5 +147,56 @@ table thead tr th {
 td {
   color: #888;
   font-size: 13px; }
+
+.checkbox {
+  text-align: center;
+  width: 10%; }
+
+/*  ==========================================================================
+    Footer
+    ========================================================================== */
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  padding: 10px 0;
+  color: #717171;
+  background: #E7E7E7;
+  font-size: 13px; }
+  footer a {
+    color: #624589; }
+
+.love {
+  color: #e74c3c;
+  display: inline-block;
+  font-size: 1.4em;
+  position: relative;
+  top: .1em;
+  -webkit-transform: scale(0.9);
+  -moz-transform: scale(0.9);
+  transform: scale(0.9);
+  -webkit-animation: love .5s infinite linear alternate-reverse;
+  -moz-animation: love .5s infinite linear alternate-reverse;
+  animation: love .5s infinite linear alternate-reverse; }
+
+@-webkit-keyframes love {
+  to {
+    -webkit-transform: scale(1.2); } }
+@-moz-keyframes love {
+  to {
+    -moz-transform: scale(1.2); } }
+@keyframes love {
+  to {
+    transform: scale(1.2); } }
+/*  ==========================================================================
+    Media queries
+    ========================================================================== */
+@media screen and (max-width: 1400px) {
+  .todo-wrapper {
+    width: 90%; } }
+@media screen and (max-width: 950px) {
+  .todo-wrapper {
+    width: 100%; } }
 
 /*# sourceMappingURL=styles.css.map */
