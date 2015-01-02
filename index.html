@@ -3,8 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <title>A to-do list with a twist</title>
+    <link href='css/public/styles.css' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
 </head>
 <body>
-    <div id="main_wrapper"></div>
+    <header class="clearfix">
+        <div class="wrapper">
+            <div class="logo">Doitfy</div>
+            <nav>
+                <ul>
+                    <li class="nav-item"><a href="">About</a></li>
+                    <li class="nav-item"><a href="">Log in</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <div class="wrapper centered">
+        <h1>A to-do list with a twist</h1>
+        <div class="todo-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>DONE!</th>
+                        <th>Created</th>
+                        <th>tasks</th>
+                        <th>Due</th>
+                        <th>Finished</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td>02/01/2015</td>
+                        <td>Make doitfy website</td>
+                        <td>01/02/2015</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td>02/01/2015</td>
+                        <td>Make doitfy website</td>
+                        <td>01/02/2015</td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <a class="button" href="">ADD EVENT</a>
+    </div>
 </body>
 </html>
