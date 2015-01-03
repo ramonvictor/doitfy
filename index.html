@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>A to-do list with a twist</title>
-    <link href='css/public/styles.css' rel='stylesheet' type='text/css'>
+    <link href='css/styles.css' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
 </head>
 <body>
@@ -55,4 +55,29 @@
 <footer>
     Made with <span class="love">♥</span> by <a href="https://github.com/bpassos">Bruno Passos</a> && <a href="https://github.com/ramonvictor">Ramon Bezerra</a>
 </footer>
+<div class="doitfy-modal" style="display: none;">
+    <div class="doitfy-modal-header">
+        <h2>Modal title</h2>
+        <button class="doitfy-modal-close"></button>
+    </div>
+    <div class="doitfy-modal-body">
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsum sed, eveniet, odit recusandae facilis voluptate iste commodi eligendi amet molestiae corporis magnam facere et temporibus cumque molestias aperiam laborum tenetur.</p>
+    </div>
+</div>
+<script src="js/doitfy-modal.js"></script>
+<script>
+(function() {
+    /* global DoitfyModal, console */
+    'use strict';
+    var modal = new DoitfyModal({
+        onOpen: function() {
+            console.log(':: opened');
+        },
+        onClose: function() {
+            console.log(':: closed');
+        }
+    });
+    modal.open();
+})();
+</script>
 </html>

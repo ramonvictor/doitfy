@@ -30,8 +30,7 @@
               
             </div>
             
-            <div class="content"><div class='highlight'><pre>(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> </span>{
-<span class="hljs-pi">	'use strict'</span>;</pre></div></div>
+            <div class="content"><div class='highlight'><pre><span class="hljs-comment">/* global document */</span></pre></div></div>
             
         </li>
         
@@ -71,15 +70,163 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>	<span class="hljs-keyword">var</span> DoitfyModal = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(options)</span> </span>{
+            <div class="content"><div class='highlight'><pre><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">DoitfyModal</span><span class="hljs-params">(options)</span> </span>{
+<span class="hljs-pi">	'use strict'</span>;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-5">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-5">&#182;</a>
+              </div>
+              <p>init application</p>
 
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>	<span class="hljs-keyword">this</span>.init(options);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-6">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-6">&#182;</a>
+              </div>
+              <p>return object</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>	<span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
+}
+
+DoitfyModal.prototype.init = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(options)</span> </span>{
+<span class="hljs-pi">	'use strict'</span>;
+	<span class="hljs-keyword">var</span> defaults = {
+		selector: <span class="hljs-string">'[data-open-modal]'</span>,
+		modalSelector: <span class="hljs-string">'.doitfy-modal'</span>,
+		closeSelector: <span class="hljs-string">'.doitfy-modal-close'</span>,
+		overlay: <span class="hljs-literal">true</span>,
+		autoOpen: <span class="hljs-literal">false</span>,
+		onOpen: <span class="hljs-literal">null</span>,
+		onClose: <span class="hljs-literal">null</span>
 	};
+	<span class="hljs-keyword">var</span> self = <span class="hljs-keyword">this</span>;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-7">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-7">&#182;</a>
+              </div>
+              <p>property <code>settings</code> stores global options</p>
 
-	DoitfyModal.prototype.close = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> </span>{
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>	<span class="hljs-keyword">this</span>.settings = extend(defaults, options);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-8">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-8">&#182;</a>
+              </div>
+              <p>stores reference to modal wrapper HTML element</p>
 
-	};
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>	<span class="hljs-keyword">this</span>.modalElement = <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-keyword">this</span>.settings.modalSelector);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-9">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-9">&#182;</a>
+              </div>
+              <p>stores reference to modal close button element</p>
 
-})();</pre></div></div>
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>	<span class="hljs-keyword">this</span>.closeButton = <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-keyword">this</span>.settings.closeSelector);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-10">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-10">&#182;</a>
+              </div>
+              <p>register all event listerners</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>	<span class="hljs-keyword">this</span>.closeButton.addEventListener(<span class="hljs-string">'click'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> </span>{
+		self.close();
+	});
+};
+
+DoitfyModal.prototype.close = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> </span>{
+<span class="hljs-pi">	'use strict'</span>;
+	<span class="hljs-keyword">var</span> onClose = <span class="hljs-keyword">this</span>.settings.onClose;
+	<span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> onClose === <span class="hljs-string">'function'</span>) {
+		onClose();
+	}
+};
+
+DoitfyModal.prototype.open = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> </span>{
+<span class="hljs-pi">	'use strict'</span>;
+	<span class="hljs-keyword">var</span> onOpen = <span class="hljs-keyword">this</span>.settings.onOpen;
+	<span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> onOpen === <span class="hljs-string">'function'</span>) {
+		onOpen();
+	}
+};</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-11">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-11">&#182;</a>
+              </div>
+              <p>Merge defaults with user options
+receives <code>defaults</code> settings and User <code>options</code>
+returns merged values of <code>defaults</code> and <code>options</code></p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">extend</span><span class="hljs-params">(defaults, options)</span> </span>{
+<span class="hljs-pi">	'use strict'</span>;
+	<span class="hljs-keyword">var</span> extended = {};
+	<span class="hljs-keyword">var</span> prop;
+	<span class="hljs-keyword">for</span> (prop <span class="hljs-keyword">in</span> defaults) {
+		<span class="hljs-keyword">if</span> (<span class="hljs-built_in">Object</span>.prototype.hasOwnProperty.call(defaults, prop)) {
+			extended[prop] = defaults[prop];
+		}
+	}
+	<span class="hljs-keyword">for</span> (prop <span class="hljs-keyword">in</span> options) {
+		<span class="hljs-keyword">if</span> (<span class="hljs-built_in">Object</span>.prototype.hasOwnProperty.call(options, prop)) {
+			extended[prop] = options[prop];
+		}
+	}
+	<span class="hljs-keyword">return</span> extended;
+}</pre></div></div>
             
         </li>
         

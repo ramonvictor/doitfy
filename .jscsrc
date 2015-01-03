@@ -90,7 +90,7 @@
   "disallowNewlineBeforeBlockStatements": true,
   "validateLineBreaks": "LF",
   "validateQuoteMarks": "'",
-  "validateIndentation": "\t",
+  // "validateIndentation": "\t",
   "validateParameterSeparator": ", ",
   "safeContextKeyword": ["self"]
 }
