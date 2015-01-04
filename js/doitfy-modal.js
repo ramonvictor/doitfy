@@ -1,21 +1,20 @@
 // DoitfyModal
 // ----------------
-
-// @module: DoitfyModal
-// @class: receives `options` object.
-// @returns: {Object} `this` and its public methods
-function DoitfyModal(options) {
+var DoitfyModal = (function(window, undefined) {
 	'use strict';
-	this.init(options);
 
-	return this;
-}
+	// @module: DoitfyModal
+	// @class: receives `options` object.
+	// @returns: {Object} `this` and its public methods
+	function DoitfyModal(options) {
+		this.init(options);
 
-(function(app) {
-	'use strict';
+		return this;
+	}
+
 	// @public: inits application
 	// @param: {Object} `options`
-	app.prototype.init = function(options) {
+	DoitfyModal.prototype.init = function(options) {
 		// {Object} `defaults` definition
 		var defaults = {
 			selector: '[data-doitfy-modal]',
@@ -46,7 +45,7 @@ function DoitfyModal(options) {
 
 	// @public: closes modal
 	// @param: {Object} `targetElement`
-	app.prototype.close = function(targetElement) {
+	DoitfyModal.prototype.close = function(targetElement) {
 		targetElement.classList.remove(this.settings.showModalClassName);
 
 		if (this.settings.showOverlay) {
@@ -56,7 +55,7 @@ function DoitfyModal(options) {
 
 	// @public: opens modal
 	// @param: {Object} `targetElement`
-	app.prototype.open = function(targetElement) {
+	DoitfyModal.prototype.open = function(targetElement) {
 		this.closeShownModal();
 
 		targetElement.classList.add(this.settings.showModalClassName);
@@ -68,7 +67,7 @@ function DoitfyModal(options) {
 
 	// @public: loops through list of triggers and fires a callback
 	// @returns: `callback`
-	app.prototype.each = function(callback) {
+	DoitfyModal.prototype.each = function(callback) {
 		var array = [];
 		array.forEach.call(this.triggers, function(element) {
 			if (typeof callback === 'function') {
@@ -78,7 +77,7 @@ function DoitfyModal(options) {
 	}
 
 	// @public: closes modal if any is shown
-	app.prototype.closeShownModal = function() {
+	DoitfyModal.prototype.closeShownModal = function() {
 		var array = [];
 		var showModalClassName = this.settings.showModalClassName;
 		array.forEach.call(this.modalElements, function(element) {
@@ -133,4 +132,6 @@ function DoitfyModal(options) {
 			callback();
 		}
 	}
-})(DoitfyModal);
+
+	return DoitfyModal;
+})(window);
