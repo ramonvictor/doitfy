@@ -12,65 +12,130 @@ function DoitfyModal(options) {
 	return this;
 }
 
-DoitfyModal.prototype.init = function(options) {
+(function(app) {
 	'use strict';
-	var defaults = {
-		selector: '[data-open-modal]',
-		modalSelector: '.doitfy-modal',
-		closeSelector: '.doitfy-modal-close',
-		overlay: true,
-		autoOpen: false,
-		onOpen: null,
-		onClose: null
+	app.prototype.init = function(options) {
+		var defaults = {
+			selector: '[data-doitfy-modal]',
+			modalSelector: '.doitfy-modal',
+			closeSelector: '.doitfy-modal-close',
+			showModalClassName: 'doitfy-modal-is-open',
+			showOverlay: true
+		};
+		var self = this;
+
+		// property `settings` stores global options
+		this.settings = extend(defaults, options);
+
+		// array of modal elements
+		this.modalElements = docQSA(this.settings.modalSelector);
+
+		// array of modal trigger elements
+		this.triggers = docQSA(this.settings.selector);
+
+		// overlay setup
+		if (this.settings.showOverlay) {
+			setupOverlay(function() {
+				self.overlayElement = docQS('.doitfy-modal-overlay');
+			});
+		}
 	};
-	var self = this;
 
-	// property `settings` stores global options
-	this.settings = extend(defaults, options);
+	// closes modal
+	app.prototype.close = function(targetElement) {
+		targetElement.classList.remove(this.settings.showModalClassName);
 
-	// stores reference to modal wrapper HTML element
-	this.modalElement = document.querySelector(this.settings.modalSelector);
-	// stores reference to modal close button element
-	this.closeButton = document.querySelector(this.settings.closeSelector);
+		if (this.settings.showOverlay) {
+			this.overlayElement.classList.remove('is-shown');
+		}
+	};
 
-	// register all event listerners
-	this.closeButton.addEventListener('click', function() {
-		self.close();
-	});
-};
+	// open modal
+	app.prototype.open = function(targetElement) {
+		this.closeShownModal();
 
-DoitfyModal.prototype.close = function() {
-	'use strict';
-	var onClose = this.settings.onClose;
-	if (typeof onClose === 'function') {
-		onClose();
+		targetElement.classList.add(this.settings.showModalClassName);
+
+		if (this.settings.showOverlay) {
+			this.overlayElement.classList.add('is-shown');
+		}
+	};
+
+	// loops through list of triggers and fires a callback for each of them
+	// `callback` returns `element` reference
+	app.prototype.each = function(callback) {
+		forEach(this.triggers, function(element) {
+			if (typeof callback === 'function') {
+				callback(element);
+			}
+		})
 	}
-};
 
-DoitfyModal.prototype.open = function() {
-	'use strict';
-	var onOpen = this.settings.onOpen;
-	if (typeof onOpen === 'function') {
-		onOpen();
+	// closes modal if shown
+	app.prototype.closeShownModal = function() {
+		var showModalClassName = this.settings.showModalClassName;
+		forEach(this.modalElements, function(element) {
+			if (element.classList.contains(showModalClassName)) {
+				element.classList.remove(showModalClassName);
+				return;
+			}
+		});
 	}
-};
 
-// Merge defaults with user options
-// receives `defaults` settings and User `options`
-// returns merged values of `defaults` and `options`
-function extend(defaults, options) {
-	'use strict';
-	var extended = {};
-	var prop;
-	for (prop in defaults) {
-		if (Object.prototype.hasOwnProperty.call(defaults, prop)) {
-			extended[prop] = defaults[prop];
+	// return querySelectorAll
+	function docQSA(selector) {
+		return document.querySelectorAll(selector);
+	}
+
+	// return querySelector
+	function docQS(selector) {
+		return document.querySelector(selector);
+	}
+
+	// Merge defaults with user options
+	// receives `defaults` settings and User `options`
+	// returns merged values of `defaults` and `options`
+	function extend(defaults, options) {
+		var extended = {};
+		var prop;
+		for (prop in defaults) {
+			if (Object.prototype.hasOwnProperty.call(defaults, prop)) {
+				extended[prop] = defaults[prop];
+			}
+		}
+		for (prop in options) {
+			if (Object.prototype.hasOwnProperty.call(options, prop)) {
+				extended[prop] = options[prop];
+			}
+		}
+		return extended;
+	}
+
+	// loops through list of elements and fires a callback for each of them
+	function forEach(elements, callback) {
+		if (!isNodeList(elements)) {
+			return;
+		}
+
+		for (var i = 0; i < elements.length; i = i + 1) {
+			if (typeof callback === 'function') {
+				callback(elements[i]);
+			}
 		}
 	}
-	for (prop in options) {
-		if (Object.prototype.hasOwnProperty.call(options, prop)) {
-			extended[prop] = options[prop];
+
+	// setupOverlay function
+	function setupOverlay(callback) {
+		var div = document.createElement('div');
+		div.classList.add('doitfy-modal-overlay');
+		docQS('body').appendChild(div);
+		if (typeof callback === 'function') {
+			callback();
 		}
 	}
-	return extended;
-}
+
+	// receive `arrayVar` and returns boolean
+	function isNodeList(arrayVar) {
+		return Object.prototype.toString.call(arrayVar) === '[object NodeList]';
+	}
+})(DoitfyModal);

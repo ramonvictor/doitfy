@@ -12,7 +12,7 @@
             <div class="logo"><a href="#top">Doitfy</a></div>
             <nav>
                 <ul>
-                    <li class="nav-item"><a href="">About</a></li>
+                    <li class="nav-item"><a href="" data-doitfy-modal="#add-about-modal">About</a></li>
                     <li class="nav-item"><a href="">Log in</a></li>
                 </ul>
             </nav>
@@ -49,16 +49,25 @@
                 </tbody>
             </table>
         </div>
-        <a class="button" href="">ADD EVENT</a>
+        <a class="button" href="" data-doitfy-modal="#add-event-modal">ADD EVENT</a>
     </div>
 </body>
 <footer>
     Made with <span class="love">♥</span> by <a href="https://github.com/bpassos">Bruno Passos</a> && <a href="https://github.com/ramonvictor">Ramon Bezerra</a>
 </footer>
-<div class="doitfy-modal" style="display: none;">
+<div id="add-event-modal" class="doitfy-modal">
     <div class="doitfy-modal-header">
-        <h2>Modal title</h2>
-        <button class="doitfy-modal-close"></button>
+        <h2>Add Event</h2>
+        <button class="doitfy-modal-close">x</button>
+    </div>
+    <div class="doitfy-modal-body">
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsum sed, eveniet, odit recusandae facilis voluptate iste commodi eligendi amet molestiae corporis magnam facere et temporibus cumque molestias aperiam laborum tenetur.</p>
+    </div>
+</div>
+<div id="add-about-modal" class="doitfy-modal">
+    <div class="doitfy-modal-header">
+        <h2>About</h2>
+        <button class="doitfy-modal-close">x</button>
     </div>
     <div class="doitfy-modal-body">
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsum sed, eveniet, odit recusandae facilis voluptate iste commodi eligendi amet molestiae corporis magnam facere et temporibus cumque molestias aperiam laborum tenetur.</p>
@@ -67,17 +76,29 @@
 <script src="js/doitfy-modal.js"></script>
 <script>
 (function() {
-    /* global DoitfyModal, console */
+    /* global DoitfyModal, document */
     'use strict';
     var modal = new DoitfyModal({
-        onOpen: function() {
-            console.log(':: opened');
-        },
-        onClose: function() {
-            console.log(':: closed');
-        }
+        showOverlay: false
     });
-    modal.open();
+    // each method
+    modal.each(function(element) {
+       var target = element.getAttribute('data-doitfy-modal');
+       var targetElement = document.querySelector(target);
+       var closeBtn = targetElement.querySelector(modal.settings.closeSelector);
+
+       // close click listerner
+       closeBtn.addEventListener('click', function(event) {
+        event.preventDefault();
+        modal.close(targetElement);
+       });
+
+       // open click listerner
+       element.addEventListener('click', function(event) {
+        event.preventDefault();
+        modal.open(targetElement);
+       });
+    });
 })();
 </script>
 </html>
