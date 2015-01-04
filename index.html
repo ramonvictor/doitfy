@@ -7,7 +7,7 @@
     <link href='http://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
 </head>
 <body>
-    <header class="clearfix">
+    <header class="group">
         <div class="wrapper">
             <div class="logo"><a href="#top">Doitfy</a></div>
             <nav>
@@ -56,18 +56,18 @@
     Made with <span class="love">♥</span> by <a href="https://github.com/bpassos">Bruno Passos</a> && <a href="https://github.com/ramonvictor">Ramon Bezerra</a>
 </footer>
 <div id="add-event-modal" class="doitfy-modal">
-    <div class="doitfy-modal-header">
-        <h2>Add Event</h2>
+    <div class="doitfy-modal-header group">
         <button class="doitfy-modal-close">x</button>
+        <h2 class="doitfy-modal-title">Add Event</h2>
     </div>
     <div class="doitfy-modal-body">
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsum sed, eveniet, odit recusandae facilis voluptate iste commodi eligendi amet molestiae corporis magnam facere et temporibus cumque molestias aperiam laborum tenetur.</p>
     </div>
 </div>
 <div id="add-about-modal" class="doitfy-modal">
-    <div class="doitfy-modal-header">
-        <h2>About</h2>
+    <div class="doitfy-modal-header group">
         <button class="doitfy-modal-close">x</button>
+        <h2 class="doitfy-modal-title">About</h2>
     </div>
     <div class="doitfy-modal-body">
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsum sed, eveniet, odit recusandae facilis voluptate iste commodi eligendi amet molestiae corporis magnam facere et temporibus cumque molestias aperiam laborum tenetur.</p>
@@ -76,10 +76,10 @@
 <script src="js/doitfy-modal.js"></script>
 <script>
 (function() {
-    /* global DoitfyModal, document */
+    /* global DoitfyModal */
     'use strict';
     var modal = new DoitfyModal({
-        showOverlay: false
+        showOverlay: true
     });
     // each method
     modal.each(function(element) {

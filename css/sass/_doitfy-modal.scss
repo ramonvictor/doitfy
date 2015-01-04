@@ -10,7 +10,9 @@ $doitfy-modal-height: 400px;
 	margin: (-($doitfy-modal-height/2)) 0 0 (-($doitfy-modal-width/2));
 	background: #fff;
 	z-index: 10;
-	transition: .4s all ease-out;
+	transition: .3s all ease-out;
+	border-radius: 4px;
+	box-shadow: 0 0 6px 0 rgba(0,0,0,.3);
 }
 
 .doitfy-modal-is-open {
@@ -32,4 +34,32 @@ $doitfy-modal-height: 400px;
 .doitfy-modal-overlay.is-shown {
 	opacity: 1;
 	display: block;
+}
+
+.doitfy-modal-header {
+	padding: 20px;
+	background: #B9ACCB;
+	border-radius: 4px 4px 0 0;
+}
+
+.doitfy-modal-body {
+	padding: 25px 20px 20px;
+	overflow: auto;
+	color: #555;
+
+	p {
+		line-height: 150%;
+		margin: 0 0 1em;
+	}
+}
+
+
+.doitfy-modal-title{ 
+	margin: 0;
+	font-size: 18px;
+	font-weight: 300;
+}
+
+.doitfy-modal-close {
+	float: right;
 }

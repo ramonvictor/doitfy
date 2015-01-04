@@ -1,20 +1,22 @@
-/* global document */
 // DoitfyModal
 // ----------------
 
-// Class that receives `options` object.
+// @module: DoitfyModal
+// @class: receives `options` object.
+// @returns: {Object} `this` and its public methods
 function DoitfyModal(options) {
 	'use strict';
-	// init application
 	this.init(options);
 
-	// return object
 	return this;
 }
 
 (function(app) {
 	'use strict';
+	// @public: inits application
+	// @param: {Object} `options`
 	app.prototype.init = function(options) {
+		// {Object} `defaults` definition
 		var defaults = {
 			selector: '[data-doitfy-modal]',
 			modalSelector: '.doitfy-modal',
@@ -24,24 +26,26 @@ function DoitfyModal(options) {
 		};
 		var self = this;
 
-		// property `settings` stores global options
+		// {Object} `settings` - stores global options
 		this.settings = extend(defaults, options);
 
-		// array of modal elements
+		// {Array} of modal wrapper elements
 		this.modalElements = docQSA(this.settings.modalSelector);
 
-		// array of modal trigger elements
+		// {Array} of modal trigger elements
 		this.triggers = docQSA(this.settings.selector);
 
-		// overlay setup
+		// Checks overlay option
 		if (this.settings.showOverlay) {
 			setupOverlay(function() {
+				// {Object} modal overlay element
 				self.overlayElement = docQS('.doitfy-modal-overlay');
 			});
 		}
 	};
 
-	// closes modal
+	// @public: closes modal
+	// @param: {Object} `targetElement`
 	app.prototype.close = function(targetElement) {
 		targetElement.classList.remove(this.settings.showModalClassName);
 
@@ -50,7 +54,8 @@ function DoitfyModal(options) {
 		}
 	};
 
-	// open modal
+	// @public: opens modal
+	// @param: {Object} `targetElement`
 	app.prototype.open = function(targetElement) {
 		this.closeShownModal();
 
@@ -61,20 +66,22 @@ function DoitfyModal(options) {
 		}
 	};
 
-	// loops through list of triggers and fires a callback for each of them
-	// `callback` returns `element` reference
+	// @public: loops through list of triggers and fires a callback
+	// @returns: `callback`
 	app.prototype.each = function(callback) {
-		forEach(this.triggers, function(element) {
+		var array = [];
+		array.forEach.call(this.triggers, function(element) {
 			if (typeof callback === 'function') {
 				callback(element);
 			}
-		})
+		});
 	}
 
-	// closes modal if shown
+	// @public: closes modal if any is shown
 	app.prototype.closeShownModal = function() {
+		var array = [];
 		var showModalClassName = this.settings.showModalClassName;
-		forEach(this.modalElements, function(element) {
+		array.forEach.call(this.modalElements, function(element) {
 			if (element.classList.contains(showModalClassName)) {
 				element.classList.remove(showModalClassName);
 				return;
@@ -82,19 +89,23 @@ function DoitfyModal(options) {
 		});
 	}
 
-	// return querySelectorAll
+	// @private: short version of querySelectorAll
+	// @param: {string} `selector` - css-like
+	// @returns: {Array|NodeList} selector list
 	function docQSA(selector) {
 		return document.querySelectorAll(selector);
 	}
 
-	// return querySelector
+	// @private: short version of querySelector
+	// @param: css-like `selector`
+	// @returns: {Object} first DOM selector
 	function docQS(selector) {
 		return document.querySelector(selector);
 	}
 
-	// Merge defaults with user options
-	// receives `defaults` settings and User `options`
-	// returns merged values of `defaults` and `options`
+	// @private: merge defaults with user options
+	// @param: `defaults` settings and user `options`
+	// @returns: merged values of `defaults` and `options`
 	function extend(defaults, options) {
 		var extended = {};
 		var prop;
@@ -111,20 +122,9 @@ function DoitfyModal(options) {
 		return extended;
 	}
 
-	// loops through list of elements and fires a callback for each of them
-	function forEach(elements, callback) {
-		if (!isNodeList(elements)) {
-			return;
-		}
-
-		for (var i = 0; i < elements.length; i = i + 1) {
-			if (typeof callback === 'function') {
-				callback(elements[i]);
-			}
-		}
-	}
-
-	// setupOverlay function
+	// @private: creates overlay element
+	// @param: `callback` - on finish
+	// @returns: `callback`
 	function setupOverlay(callback) {
 		var div = document.createElement('div');
 		div.classList.add('doitfy-modal-overlay');
@@ -132,10 +132,5 @@ function DoitfyModal(options) {
 		if (typeof callback === 'function') {
 			callback();
 		}
-	}
-
-	// receive `arrayVar` and returns boolean
-	function isNodeList(arrayVar) {
-		return Object.prototype.toString.call(arrayVar) === '[object NodeList]';
 	}
 })(DoitfyModal);
